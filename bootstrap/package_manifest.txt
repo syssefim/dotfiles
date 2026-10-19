@@ -1,0 +1,10 @@
+git
+python
+pip
+docker
+vs code
+neovim
+obsidian
+firefox
+discord
+npm
