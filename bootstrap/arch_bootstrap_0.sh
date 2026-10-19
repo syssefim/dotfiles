@@ -29,9 +29,14 @@ set -e
 PACKAGES=(
     "git:Git"
     "python:Python 3"
+    "python-pip:pip"
+    "npm:Node.js + npm"
+    "docker:Docker"
     "code:VS Code"
     "neovim:Neovim"
     "obsidian:Obsidian"
+    "firefox:Firefox"
+    "discord:Discord"
 )
 
 # Array to store the packages the user actually wants
@@ -65,6 +70,14 @@ if [ ${#TO_INSTALL[@]} -eq 0 ]; then
 else
     echo "Installing chosen packages: ${TO_INSTALL[*]}"
     sudo pacman -S --noconfirm "${TO_INSTALL[@]}"
+fi
+
+# Docker needs its service enabled and the user added to the docker group
+if [[ " ${TO_INSTALL[*]} " == *" docker "* ]]; then
+    echo "Configuring Docker..."
+    sudo systemctl enable --now docker.service
+    sudo usermod -aG docker "$USER"
+    echo "Log out and back in to use docker without sudo."
 fi
 
 check_status() {
