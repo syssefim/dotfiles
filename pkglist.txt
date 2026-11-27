@@ -1,0 +1,7 @@
+firefox
+git
+hyprland
+kitty
+neovim
+mako
+
